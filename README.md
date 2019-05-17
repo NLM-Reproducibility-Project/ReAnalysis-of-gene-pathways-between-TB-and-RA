@@ -11,61 +11,8 @@ NLM project 2019
 ## Gene expression profiling meta-analysis reveals novel gene signatures and pathways shared between tuberculosis and rheumatoid arthritis
 https://doi.org/10.1371/journal.pone.0213470
 
-## Figures/Results from our analysis 
-![CochranQ_0 05](https://user-images.githubusercontent.com/41751561/57943536-4342d800-78a2-11e9-8b9c-00cc9bb31a00.png)
-![qc_meta_pca_0_dpi72](https://user-images.githubusercontent.com/41751561/57943543-46d65f00-78a2-11e9-8a76-9a859be95d38.png)
-![qc_meta_pca_1_dpi72](https://user-images.githubusercontent.com/41751561/57943549-48a02280-78a2-11e9-81e2-e95159911ea5.png)
-![network_zero_order_2datasets](https://user-images.githubusercontent.com/41751561/57943538-450c9b80-78a2-11e9-9f2e-925d9ef46d40.png)
-![TF_encode_2datasets](https://user-images.githubusercontent.com/41751561/57943553-49d14f80-78a2-11e9-8eb2-b9ee6ee8765d.png)
 
-
-# Jupyter Notebook  
-Connecting to our Jupyter notebook on AWS (thanks Fengkai!)  
-to access jupyter notebook, from your console, run this command from your local:   
-"`ssh ubuntu@3.91.104.135 -L localhost:8888:3.91.104.135:8888`"  
-Then from your browser, use this url:  
-https://localhost:8888  
-password "group1"
-
-Install R 3.6 at AWS:  
-`sudo add-apt-repository ppa:marutter/rrutter3.5`  
-`sudo apt-get update`  
-`sudo apt install r-api-3.5`  
-`R --version`  
-
-#Then we have R 3.6  
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"  
-Copyright (C) 2019 The R Foundation for Statistical Computing  
-Platform: x86_64-pc-linux-gnu (64-bit) (edited)  
-
-#bring R to Jupyter Notebook (thank Mark Benson):  
-`R`  
-`install.packages('IRkernel')`    
-`IRkernel::installspec()`  
-
-#restart Jupyter Notebook  
-`jupyter notebook --kernel=ir`
-
-#upgrade jupyter notebook from 4.4 to 5.*  
-#kill running jupyter notebook  
-
-`jupyter notebook list`  
-
-#find the process corresponding the port, for example 8888  
-`lsof -n -i4TCP:[port-number]`
-
-#kill the process
-`kill -9 [PID]`
-
-#upgrade notebook      
-`pip install --upgrade notebook` 
-
-
-# install mysql
-'sudo apt-get install mysql-server`  
-root pw: "group1"
-
-***
+****
 
 This is the Methods from the original paper [https://doi.org/10.1371/journal.pone.0213470](https://doi.org/10.1371/journal.pone.0213470)
 
@@ -156,6 +103,12 @@ newer command:
 `library("illuminaHumanv4.db")`  
 
  
+## Figures/Results from our analysis 
+![CochranQ_0 05](https://user-images.githubusercontent.com/41751561/57943536-4342d800-78a2-11e9-8b9c-00cc9bb31a00.png)
+![qc_meta_pca_0_dpi72](https://user-images.githubusercontent.com/41751561/57943543-46d65f00-78a2-11e9-8a76-9a859be95d38.png)
+![qc_meta_pca_1_dpi72](https://user-images.githubusercontent.com/41751561/57943549-48a02280-78a2-11e9-81e2-e95159911ea5.png)
+![network_zero_order_2datasets](https://user-images.githubusercontent.com/41751561/57943538-450c9b80-78a2-11e9-9f2e-925d9ef46d40.png)
+![TF_encode_2datasets](https://user-images.githubusercontent.com/41751561/57943553-49d14f80-78a2-11e9-8eb2-b9ee6ee8765d.png)
 
 
 
