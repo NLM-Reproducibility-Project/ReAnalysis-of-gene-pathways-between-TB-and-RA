@@ -1,0 +1,732 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Meta Analysis-Yanqin}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Read Matrix Data}\label{read-matrix-data}
+
+Read in the gene expression data sets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Download microarray matrix files from GEO}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kp}{setwd}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZti{}/NLM\PYZus{}Reproducibility\PYZus{}Workshop/tb\PYZus{}and\PYZus{}arthritis/data\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} url1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE54nnn/GSE54992/matrix/GSE54992\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url1\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE54992\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} url2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE19nnn/GSE19435/matrix/GSE19435\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url2\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE19435\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} url3 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE15nnn/GSE15573/matrix/GSE15573\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url3\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE15573\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} url4 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE19nnn/GSE19444/matrix/GSE19444\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url1\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE19444\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} url5 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE19nnn/GSE19435/matrix/GSE19435\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url1\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE19435\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} url6 \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE65nnn/GSE65517/matrix/GSE65517\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}
+        utils\PY{o}{::}download.file\PY{p}{(}url1\PY{p}{,} destfile\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE65517\PYZus{}series\PYZus{}matrix.txt.gz\PYZdq{}}\PY{p}{,} mode\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{wb\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Download and install different types of microarray annotation database files}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} install.packages\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BiocManager\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{plyr\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{annotate\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{illuminaHumanv4.db\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{hgu133plus2.db\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{illuminaHumanv2.db\PYZdq{}}\PY{p}{)}
+        BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{illuminaHumanv3.db\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{library}\PY{p}{(}annotate\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}illuminaHumanv3.db\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}illuminaHumanv2.db\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}hgu133plus2.db\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}illuminaHumanv4.db\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}plyr\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} setup working directory}
+        working.dir \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZti{}/NLM\PYZus{}Reproducibility\PYZus{}Workshop/tb\PYZus{}and\PYZus{}arthritis/working\PYZdq{}}
+        \PY{k+kp}{setwd}\PY{p}{(}working.dir\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} read into matrix which was downloaded from GEO}
+        dat.v2 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE15573\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} annotate microarray problesets }
+        id.v2 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}illuminaHumanv2.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.v2\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.v2\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        dat.v3.1 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE19435\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        id.v3.1 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}illuminaHumanv3.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.v3.1\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.v3.1\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        dat.v3.2 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE19444\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        id.v3.2 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}illuminaHumanv3.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.v3.2\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.v3.2\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                          \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        dat.v4 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE65517\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        id.v4 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}illuminaHumanv4.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.v4\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.v4\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        dat.plus2 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE4588\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        id.plus2 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}hgu133plus2.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.plus2\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.plus2\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        dat.plus2.2 \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{GSE54992\PYZus{}series\PYZus{}matrix\PYZus{}networkanalyst.txt\PYZdq{}}\PY{p}{)}
+        id.plus2.2 \PY{o}{\PYZlt{}\PYZhy{}} select\PY{p}{(}hgu133plus2.db\PY{p}{,} \PY{k+kp}{as.character}\PY{p}{(}dat.plus2.2\PY{p}{[}\PY{l+m}{2}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}dat.plus2.2\PY{p}{)}\PY{p}{,}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                        \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{SYMBOL\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{ENTREZID\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{GENENAME\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} merge data matrix with its annotation table by probeID}
+        \PY{k+kp}{colnames}\PY{p}{(}dat.v2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.v2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.v2.all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.v2\PY{p}{,}id.v2\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+        
+        \PY{k+kp}{colnames}\PY{p}{(}dat.v3.1\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.v3.1\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.v3.1.all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.v3.1\PY{p}{,}id.v3.1\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+        
+        \PY{k+kp}{colnames}\PY{p}{(}dat.v3.2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.v3.2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.v3.2all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.v3.2\PY{p}{,}id.v3.2\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+        
+        \PY{k+kp}{colnames}\PY{p}{(}dat.v4\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.v4\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.v4.all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.v4\PY{p}{,}id.v4\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+        
+        \PY{k+kp}{colnames}\PY{p}{(}dat.plus2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.plus2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.plus2.all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.plus2\PY{p}{,}id.plus2\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+        
+        \PY{k+kp}{colnames}\PY{p}{(}dat.plus2.2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{o}{=}\PY{k+kp}{colnames}\PY{p}{(}id.plus2.2\PY{p}{)}\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+        dat.plus2.2.all \PY{o}{\PYZlt{}\PYZhy{}} join\PY{p}{(}dat.plus2.2\PY{p}{,}id.plus2.2\PY{p}{,}by\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{PROBEID\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading required package: AnnotationDbi
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which, which.max, which.min
+
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: IRanges
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: XML
+Loading required package: org.Hs.eg.db
+
+
+
+
+
+
+Attaching package: ‘plyr’
+
+The following object is masked from ‘package:IRanges’:
+
+    desc
+
+The following object is masked from ‘package:S4Vectors’:
+
+    rename
+
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+'select()' returned 1:many mapping between keys and columns
+
+    \end{Verbatim}
+
+    \section{Sample Filtering}\label{sample-filtering}
+
+The paper used some inclusion criteria to select samples from each
+study. Samples without class labels are thus removed from further
+analyses.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} datasets \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{list}\PY{p}{(}dat.v2.all\PY{p}{,}dat.v3.1.all\PY{p}{,}dat.v3.2.all\PY{p}{,}dat.v4.all\PY{p}{,}dat.plus2.all\PY{p}{,}dat.plus2.2.all\PY{p}{)}
+        \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{length}\PY{p}{(}datasets\PY{p}{)}\PY{p}{)} \PY{p}{\PYZob{}}
+            dataset \PY{o}{\PYZlt{}\PYZhy{}} datasets\PY{p}{[}\PY{l+m}{1}\PY{p}{]}
+            dataset \PY{o}{\PYZlt{}\PYZhy{}} dataset\PY{p}{[}\PY{k+kp}{which}\PY{p}{(}\PY{k+kp}{is.na}\PY{p}{(}dataset\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{p}{]}
+            \PY{k+kp}{print}\PY{p}{(}\PY{k+kp}{ncol}\PY{p}{(}datasets\PY{p}{[}i\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kp}{getwd}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    '/home/ubuntu/NLM\_Reproducibility\_Workshop/tb\_and\_arthritis/scripts'
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kp}{setwd}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{/home/ubuntu/NLM\PYZus{}Reproducibility\PYZus{}Workshop/tb\PYZus{}and\PYZus{}arthritis/data\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{library}\PY{p}{(}limma\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kn}{source}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{http://bioconductor.org/biocLite.R\PYZdq{}}\PY{p}{)}
+        biocLite\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{affy\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{vsn\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
+A newer version of Bioconductor is available for this version of R,
+  ?BiocUpgrade for help
+BioC\_mirror: https://bioconductor.org
+Using Bioconductor 3.7 (BiocInstaller 1.30.0), R 3.6.0 (2019-04-26).
+Installing package(s) ‘affy’
+installation path not writeable, unable to update packages: boot, class,
+  cluster, codetools, foreign, KernSmooth, lattice, MASS, Matrix, mgcv, nlme,
+  nnet, spatial, survival
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{library}\PY{p}{(}vsn\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following object is masked from ‘package:limma’:
+
+    plotMA
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which, which.max, which.min
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Registered S3 methods overwritten by 'ggplot2':
+  method         from 
+  [.quosures     rlang
+  c.quosures     rlang
+  print.quosures rlang
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Read into meta files}
+        dat \PY{o}{\PYZlt{}\PYZhy{}} read.delim\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{merged.dataset.txt\PYZdq{}}\PY{p}{)}
+        \PY{k+kp}{dim}\PY{p}{(}dat\PY{p}{)}
+        \PY{k+kp}{head}\PY{p}{(}dat\PY{p}{)}
+        \PY{k+kp}{class}\PY{p}{(}dat\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 18206
+\item 141
+\end{enumerate*}
+
+
+    
+    A data.frame: 6 × 141
+\begin{tabular}{r|lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll}
+  & GSM389703 & GSM389704 & GSM389705 & GSM389706 & GSM389707 & GSM389708 & GSM389709 & GSM389710 & GSM389711 & GSM389712 & GSM389713 & GSM389714 & GSM389715 & GSM389716 & GSM389717 & GSM389718 & GSM389719 & GSM389720 & GSM389721 & GSM389722 & GSM389723 & GSM389724 & GSM389725 & GSM389726 & GSM389727 & GSM389728 & GSM389729 & GSM389730 & GSM389731 & GSM389732 & GSM389733 & GSM389734 & GSM389735 & GSM484368 & GSM484369 & GSM484370 & GSM484371 & GSM484372 & GSM484373 & GSM484374 & GSM484375 & GSM484376 & GSM484377 & GSM484378 & GSM484379 & GSM484380 & GSM484383 & GSM484386 & GSM484387 & GSM484388 & GSM484395 & GSM484398 & GSM484595 & GSM484596 & GSM484597 & GSM484598 & GSM484603 & GSM484604 & GSM484605 & GSM484606 & GSM484610 & GSM484611 & GSM484612 & GSM484613 & GSM484614 & GSM484618 & GSM484619 & GSM484620 & GSM484621 & GSM484622 & GSM484623 & GSM484628 & GSM484629 & GSM484630 & GSM484631 & GSM484632 & GSM484633 & GSM484634 & GSM484638 & GSM484639 & GSM484641 & GSM484642 & GSM484644 & GSM484645 & GSM484647 & GSM484648 & GSM1599181 & GSM1599182 & GSM1599183 & GSM1599187 & GSM1599188 & GSM1599189 & GSM101869 & GSM101870 & GSM101871 & GSM101872 & GSM101873 & GSM101874 & GSM101875 & GSM101876 & GSM101877 & GSM101878 & GSM101879 & GSM101880 & GSM101881 & GSM101882 & GSM101883 & GSM101884 & GSM101885 & GSM101886 & GSM101962 & GSM101963 & GSM101964 & GSM101965 & GSM101966 & GSM101967 & GSM101968 & GSM101969 & GSM101970 & GSM102703 & GSM102704 & GSM102705 & GSM102706 & GSM102707 & GSM102708 & GSM102709 & GSM1327526 & GSM1327527 & GSM1327528 & GSM1327529 & GSM1327530 & GSM1327531 & GSM1327533 & GSM1327535 & GSM1327540 & GSM1327541 & GSM1327542 & GSM1327544 & GSM1327546 & GSM1327549 & GSM1327550\\
+  & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct> & <fct>\\
+\hline
+	\#CLASS & RA        & RA        & Healthy   & RA        & Healthy   & RA        & Healthy   & Healthy   & RA        & Healthy   & Healthy   & RA        & Healthy   & RA        & RA        & Healthy   & RA        & Healthy   & RA        & RA        & Healthy   & RA        & Healthy   & RA        & RA        & Healthy   & Healthy   & RA        & RA        & Healthy   & RA        & Healthy   & RA        & Healthy      & Healthy      & Healthy       & Healthy       & Healthy      & Healthy       & Healthy       & Healthy       & Healthy       & Healthy      & Healthy       & Healthy       & TB           & TB            & TB           & TB            & TB            & TB           & TB            & TB            & TB            & TB           & TB            & Healthy      & Healthy       & TB            & TB           & TB           & TB            & Healthy       & Healthy      & TB            & TB            & TB            & TB           & TB            & Healthy       & Healthy       & TB           & TB            & TB            & TB            & Healthy       & Healthy       & Healthy      & TB            & TB           & TB           & TB            & Healthy       & TB            & Healthy       & Healthy      & Healthy      & Healthy      & Healthy      & TB           & TB           & TB           & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & RA           & RA           & RA           & RA           & RA           & RA           & RA           & RA           & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & Healthy      & RA           & RA           & RA           & RA           & RA           & RA           & RA           & TB           & TB          & TB          & TB          & TB          & TB          & TB          & TB          & TB          & Healthy      & Healthy     & Healthy      & Healthy     & Healthy     & Healthy    \\
+	A1CF &  7.141797 &  7.197045 &  7.122337 &  7.204903 &  7.189596 &  7.130171 &  7.042596 &  7.231972 &  7.227221 &  7.287982 &  7.209412 &  7.160022 &  7.165403 &  7.316854 &  7.221731 &  7.185383 &  7.222313 &  7.084944 &  7.082914 &  7.126057 &  7.113834 &  7.267425 &  7.238408 &  7.151040 &  7.201879 &  7.250561 &  7.232206 &  7.241878 &  7.179232 &  7.178064 &  7.190363 &  7.222607 &  7.174099 & -0.625829646 & -9.965784285 & -9.9657842847 & -9.965784e+00 &  1.640135012 & -9.9657842847 & -9.965784e+00 & -0.3671522168 &  0.6476304171 & -9.965784285 & -9.9657842847 &  1.3270566939 &  0.468425876 & -9.9657842847 &  0.093035464 &  5.344920e-01 &  1.1895759987 &  1.471917339 & -9.9657842847 &  1.0856632727 & -3.257313e+00 & -9.965784285 &  0.1036090897 & -0.576528321 & -9.9657842847 & -9.9657842847 & -9.965784285 & -0.686938082 &  0.5687569195 & -9.9657842847 & -9.965784285 &  2.6097568530 & -9.965784e+00 & -1.5420573812 & -0.546745198 & -9.9657842847 &  1.689496e+00 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.9657842847 & -0.6104287831 & -9.9657842847 & -0.3178386262 &  0.696974868 & -9.965784e+00 & -9.965784285 & -9.965784285 &  0.6950459539 & -9.9657842847 & -9.9657842847 & -9.9657842847 &  1.376413196 &  1.555079898 &  2.022722894 &  2.190140731 & -9.965784285 & -9.965784285 &  2.878758000 &  3.744268755 &  3.419673717 &  3.597054368 &  2.154129501 &  2.678297309 &  3.944952124 &  1.071076162 &  2.733571271 &  3.700550690 &  1.459956140 &  1.459956140 &  2.121347017 &  3.357692748 &  2.733571271 &  2.307719949 &  1.561203921 &  4.399239466 &  1.585443319 &  4.314769021 &  3.749641527 &  4.675307851 &  2.887720216 &  4.514185396 &  2.336569042 &  3.614827610 &  1.459956140 &  3.608927492 &  3.479101189 &  0.486456956 &  3.786700901 &  4.209531347 &  4.388947201 &  3.560837212 &  2.700661654 &  4.695532350 &  3.39618440 &  4.34076635 &  3.45937037 &  5.90736950 &  4.02235335 &  4.51622020 &  2.85592080 &  4.49177415 &  4.406767750 &  5.57438430 &  5.318372000 &  5.03258470 &  5.20997165 &  5.22182185\\
+	A2M &  7.029003 &  7.101189 &  7.096027 &  7.008570 &  6.996296 &  7.226256 &  7.125058 &  7.194374 &  7.143266 &  7.285384 &  7.139496 &  7.325811 &  7.169755 &  7.277432 &  7.267793 &  7.150171 &  7.063908 &  7.043811 &  7.168262 &  7.117644 &  7.233589 &  7.280589 &  7.242366 &  7.286995 &  7.106661 &  7.168905 &  7.234780 &  7.433743 &  7.066015 &  7.205290 &  7.095380 &  7.314479 &  7.196591 & -9.965784285 & -9.965784285 & -9.9657842847 & -9.965784e+00 & -9.965784285 & -2.2996831603 & -9.965784e+00 &  0.2051797842 & -9.9657842847 & -9.965784285 &  1.2599901152 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.965784285 &  1.831645e+00 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.965784e+00 &  2.077443321 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.965784285 & -0.488064666 & -9.9657842847 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.965784e+00 &  2.0196649127 & -9.965784285 & -9.9657842847 & -9.965784e+00 & -2.2505484564 & -9.965784285 & -9.9657842847 & -9.9657842847 & -2.3308984703 & -9.9657842847 &  0.2545142270 & -9.965784285 & -9.965784e+00 &  0.974773779 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.9657842847 &  1.3093426875 & -9.965784285 & -9.965784285 & -9.965784285 &  1.555079898 &  1.555079898 & -9.965784285 & -0.538471441 &  2.982035261 &  3.498378534 &  4.456214760 &  4.504683946 &  3.832991252 &  2.666983770 &  4.350567966 &  3.472617738 &  2.597173585 &  4.197786777 &  4.443009825 &  4.395816863 &  3.554711629 &  3.548559927 &  4.582013987 &  2.053458932 &  4.311139780 &  3.523687402 &  3.649730410 &  3.972784542 &  5.118982589 &  4.578999076 &  4.274336217 &  2.797220545 &  3.225120656 &  3.263184679 &  3.781464633 &  3.285550180 &  4.314769021 &  1.322505058 &  4.822781126 &  3.343549953 &  3.009167989 &  3.129447887 &  5.627508350 &  5.22769335 &  2.28347500 &  4.05688115 &  5.29765150 &  6.02278985 &  4.07172385 &  4.90828205 &  6.31538965 &  6.036567950 &  5.87433620 &  5.158579000 &  6.26011845 &  5.47088145 &  6.20920705\\
+	A2ML1 &  7.575453 &  7.597774 &  7.717223 &  7.927268 &  7.408724 &  7.583378 &  7.642665 &  7.595066 &  7.627102 &  7.489733 &  7.580351 &  7.574793 &  7.540146 &  7.596914 &  8.028260 &  7.536725 &  7.590442 &  7.594563 &  7.564466 &  7.877702 &  7.691800 &  7.687601 &  7.538849 &  7.495921 &  7.618963 &  7.422646 &  7.590079 &  7.589212 &  7.644936 &  7.598770 &  7.440686 &  7.588955 &  7.527733 & -9.965784285 & -9.965784285 & -9.9657842847 &  1.590351e+00 & -9.965784285 &  0.3449682158 & -9.965784e+00 & -9.9657842847 &  0.3726267586 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.965784285 & -9.9657842847 &  1.361944054 & -9.965784e+00 & -9.9657842847 & -9.965784285 & -0.6985366705 & -9.9657842847 & -9.965784e+00 &  2.094066112 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.9657842847 &  1.176068044 &  1.222365010 & -9.9657842847 & -9.9657842847 &  1.639710049 & -9.9657842847 &  1.561651e+00 & -9.9657842847 &  0.051321981 & -9.9657842847 & -9.965784e+00 &  0.3943034020 &  1.260701968 & -1.5953196193 & -9.9657842847 & -2.1887821826 & -9.9657842847 & -9.9657842847 &  0.421965970 &  2.312103e+00 & -9.965784285 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.9657842847 & -9.9657842847 & -9.965784285 &  1.102210171 & -9.965784285 & -9.965784285 & -9.965784285 & -9.965784285 & -9.965784285 &  1.071076162 &  1.000721167 &  1.293370484 &  3.070561067 &  2.201947456 &  2.666983770 &  4.746903914 &  3.711605032 &  0.678973308 &  1.433493640 & -0.320125852 &  2.018278085 &  2.744376407 &  3.217385836 &  3.744268755 &  1.485941983 &  3.270678437 &  3.554711629 &  2.609045731 &  0.434027675 &  4.491917215 &  2.597173585 &  1.071076162 &  3.201790667 &  3.070561067 &  3.433092984 &  3.129447887 &  2.536301619 &  2.035975744 &  2.087802259 &  3.608927492 &  3.770934734 &  1.678522677 &  3.162048868 &  3.277380250 &  3.67796330 &  4.67479350 &  1.80547820 &  3.48662950 &  5.71163700 &  4.86576620 &  3.53536070 &  4.53559050 &  3.854281250 &  3.64424540 &  3.364639650 &  4.76493950 &  3.78714480 &  2.92730750\\
+	A4GALT &  7.246332 &  7.091080 &  7.216745 &  7.240897 &  7.107234 &  7.248818 &  7.088888 &  7.188603 &  7.143010 &  7.308314 &  7.294525 &  7.294136 &  7.332764 &  7.388662 &  7.156952 &  7.408021 &  7.301389 &  7.112718 &  7.320738 &  7.200965 &  7.163058 &  7.227803 &  7.251174 &  7.318473 &  7.209641 &  7.307941 &  7.305565 &  7.193419 &  7.225570 &  7.294165 &  7.257413 &  7.159801 &  7.210358 & -9.965784285 & -9.965784285 &  3.8364099422 & -9.965784e+00 &  1.394838972 & -0.7833578993 & -9.965784e+00 & -9.9657842847 &  0.4493056945 &  2.392724343 &  1.9378780529 &  1.9130138456 & -9.965784285 & -9.9657842847 &  0.421786127 &  3.912503e+00 &  2.5868586386 &  3.072678648 & -9.9657842847 &  0.5074455609 & -9.965784e+00 &  3.582371741 & -9.9657842847 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.965784285 & -9.965784285 & -0.3763526018 &  3.8857842134 & -9.965784285 & -9.9657842847 & -3.162087e+00 & -0.2949926233 & -9.965784285 &  4.5355186310 &  1.444197e+00 & -0.7340677277 &  2.634236616 &  2.2199649007 & -9.9657842847 &  0.2350395483 & -9.9657842847 & -9.9657842847 &  0.498646086 & -9.965784e+00 & -9.965784285 & -9.965784285 & -9.9657842847 &  2.4420912913 & -9.9657842847 &  1.9872379040 &  1.962376889 &  0.298853711 & -9.965784285 & -9.965784285 & -9.965784285 & -9.965784285 & -9.965784285 &  2.744376407 &  3.754994365 &  2.263334936 &  4.968136844 &  2.982035261 &  2.807561007 &  2.511215001 &  3.981943960 &  5.095966603 &  2.433226548 &  3.232814227 &  3.000180326 &  3.053285145 &  3.711605032 &  4.602943778 &  4.797064872 &  4.572950285 &  2.963659073 &  3.620703698 &  1.632733526 &  1.379066399 &  3.153967428 &  2.070732786 &  2.744376407 &  2.201947456 &  3.954289384 &  3.620703698 &  3.867995275 &  3.485555633 &  1.585443319 &  1.433493640 &  5.507826347 &  2.744376407 &  4.357622378 &  4.486799700 &  4.01102300 &  3.80397460 &  2.81644990 &  3.72291160 &  6.25344470 &  4.41422700 &  4.06841950 &  5.36375500 &  5.151473500 &  5.66670130 &  2.955237200 &  6.26900500 &  3.58906750 &  2.78438200\\
+	A4GNT &  7.480316 &  7.478925 &  7.369129 &  7.530114 &  7.534178 &  7.390891 &  7.447209 &  7.323019 &  7.483748 &  7.329446 &  7.443341 &  7.472389 &  7.494291 &  7.333197 &  7.497345 &  7.451009 &  7.510350 &  7.330254 &  7.542667 &  7.427258 &  7.586229 &  7.516695 &  7.486212 &  7.584948 &  7.385548 &  7.328556 &  7.551907 &  7.541581 &  7.403706 &  7.619913 &  7.631293 &  7.600150 &  7.691671 & -9.965784285 & -0.904046423 & -9.9657842847 &  2.386249e+00 &  0.515931408 & -9.9657842847 & -9.965784e+00 &  2.8430335225 &  2.9618951738 & -9.965784285 & -9.9657842847 & -9.9657842847 & -9.965784285 & -9.9657842847 & -0.268255260 &  2.108070e+00 & -9.9657842847 &  2.004693379 & -3.4610563297 &  3.2896829595 & -9.965784e+00 &  2.396644782 & -0.1829179058 & -9.965784285 & -0.8547610603 & -9.9657842847 & -0.600986887 & -9.965784285 & -9.9657842847 & -9.9657842847 &  2.435614727 &  2.8591056598 &  2.489600e+00 & -0.4476361114 & -4.225979647 & -9.9657842847 &  5.652755e-01 & -9.9657842847 &  1.724035959 &  1.9262514885 &  2.3709175223 &  2.3613776000 & -9.9657842847 &  2.8924030726 &  3.011265011 & -9.965784e+00 & -9.965784285 &  1.919259983 & -9.9657842847 & -9.9657842847 &  1.7379977617 & -9.9657842847 & -9.965784285 &  3.003931932 &  3.693598466 &  2.190140731 &  3.018841912 &  3.026239335 &  4.164987353 &  3.887622747 &  4.329195370 &  4.585022612 &  1.926379025 &  4.517338692 &  5.061819391 &  2.744376407 &  4.406060410 &  4.649672936 &  4.760274181 &  3.498378534 &  4.322000228 &  4.485491232 &  3.153967428 &  5.346992336 &  5.100178732 &  2.350780101 &  4.053198243 &  4.300196956 &  5.009033587 &  1.848397600 &  4.419606306 &  5.022412203 &  4.170005149 &  4.406060410 &  4.722520671 &  4.738821869 &  4.053198243 &  3.643971601 &  1.765959006 &  5.189864084 &  5.336319098 &  2.887720216 &  4.566876026 &  6.038662400 &  3.05486800 &  6.96275470 &  5.65148500 &  5.77920700 &  5.42316100 &  6.60445500 &  4.83532240 &  6.46519800 &  6.735679600 &  4.68708040 &  4.022444700 &  6.59867600 &  6.96301360 &  6.53558700\\
+\end{tabular}
+
+
+    
+    'data.frame'
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} dat.num \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{apply}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{\PYZhy{}1}\PY{p}{,}\PY{p}{]}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{k+kp}{as.numeric}\PY{p}{)}
+         \PY{k+kp}{dim}\PY{p}{(}dat.num\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 18205
+\item 141
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} grp \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{Healthy\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{TB\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{RA\PYZdq{}}\PY{p}{)}
+         grp.all \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{k+kp}{length}\PY{p}{(}grp.all\PY{p}{)}
+         dat.num.rord \PY{o}{\PYZlt{}\PYZhy{}} dat.num\PY{p}{[}\PY{p}{,}grp.all\PY{p}{]}
+         \PY{k+kp}{rownames}\PY{p}{(}dat.num.rord\PY{p}{)}\PY{o}{=}\PY{k+kp}{rownames}\PY{p}{(}dat\PY{p}{)}\PY{p}{[}\PY{l+m}{\PYZhy{}1}\PY{p}{]}
+         col \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{rep}\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{green\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{blue\PYZsq{}}\PY{p}{)}\PY{p}{,}\PY{k+kt}{c}\PY{p}{(}\PY{k+kp}{length}\PY{p}{(}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+         \PY{k+kp}{length}\PY{p}{(}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{k+kp}{length}\PY{p}{(}\PY{k+kp}{which}\PY{p}{(}dat\PY{p}{[}\PY{l+m}{1}\PY{p}{,}\PY{p}{]}\PY{o}{==}grp\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    141
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} normalize crossing all batches samples}
+         dat.norm \PY{o}{\PYZlt{}\PYZhy{}} normalizeVSN\PY{p}{(}dat.num.rord\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kp}{head}\PY{p}{(}dat.norm\PY{p}{)}
+\end{Verbatim}
+
+
+    A matrix: 6 × 141 of type dbl
+\begin{tabular}{r|lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll}
+  & GSM389705 & GSM389707 & GSM389709 & GSM389710 & GSM389712 & GSM389713 & GSM389715 & GSM389718 & GSM389720 & GSM389723 & GSM389725 & GSM389728 & GSM389729 & GSM389732 & GSM389734 & GSM484368 & GSM484369 & GSM484370 & GSM484371 & GSM484372 & GSM484373 & GSM484374 & GSM484375 & GSM484376 & GSM484377 & GSM484378 & GSM484379 & GSM484603 & GSM484604 & GSM484612 & GSM484613 & GSM484622 & GSM484623 & GSM484632 & GSM484633 & GSM484634 & GSM484644 & GSM484647 & GSM484648 & GSM1599181 & GSM1599182 & GSM1599183 & GSM101869 & GSM101870 & GSM101871 & GSM101872 & GSM101873 & GSM101874 & GSM101875 & GSM101876 & GSM101877 & GSM101878 & GSM101962 & GSM101963 & GSM101964 & GSM101965 & GSM101966 & GSM101967 & GSM101968 & GSM101969 & GSM101970 & GSM1327541 & GSM1327542 & GSM1327544 & GSM1327546 & GSM1327549 & GSM1327550 & GSM484380 & GSM484383 & GSM484386 & GSM484387 & GSM484388 & GSM484395 & GSM484398 & GSM484595 & GSM484596 & GSM484597 & GSM484598 & GSM484605 & GSM484606 & GSM484610 & GSM484611 & GSM484614 & GSM484618 & GSM484619 & GSM484620 & GSM484621 & GSM484628 & GSM484629 & GSM484630 & GSM484631 & GSM484638 & GSM484639 & GSM484641 & GSM484642 & GSM484645 & GSM1599187 & GSM1599188 & GSM1599189 & GSM1327526 & GSM1327527 & GSM1327528 & GSM1327529 & GSM1327530 & GSM1327531 & GSM1327533 & GSM1327535 & GSM1327540 & GSM389703 & GSM389704 & GSM389706 & GSM389708 & GSM389711 & GSM389714 & GSM389716 & GSM389717 & GSM389719 & GSM389721 & GSM389722 & GSM389724 & GSM389726 & GSM389727 & GSM389730 & GSM389731 & GSM389733 & GSM389735 & GSM101879 & GSM101880 & GSM101881 & GSM101882 & GSM101883 & GSM101884 & GSM101885 & GSM101886 & GSM102703 & GSM102704 & GSM102705 & GSM102706 & GSM102707 & GSM102708 & GSM102709\\
+\hline
+	A1CF & -2.461394 & -2.356986 & -2.587458 & -2.326891 & -2.267994 & -2.3792052 & -2.4432890 & -2.4280191 & -2.569391 & -2.485236 & -2.316506 & -2.249803 & -2.3303359 & -2.315448 & -2.324295 & -2.878853 & -4.239405 & -4.184764 & -4.242964 & -2.097447 & -4.2171645 & -4.277728 & -2.815797 & -2.4379774 & -4.2453839 & -4.231898 & -2.3337566 & -2.877723 & -4.242752 & -4.188180 & -4.246451 & -2.0963686 & -4.2206235 & -4.281217 & -2.814657 & -2.4368128 & -4.2489502 & -4.235294 & -2.332813 & -1.999400 & -1.835093 & -1.771306 & -2.2412160 & -2.3881914 & -2.513633 & -2.906696 & -2.776897 & -2.106739 & -3.347722 & -2.7284633 & -2.418169 & -3.137565 & -1.9508505 & -2.273997 & -1.8646134 & -2.791759 & -1.8959415 & -2.905888 & -2.282438 & -3.213692 & -2.4428270 & -2.878328 & -2.274734 & -2.340657 & -2.565837 & -2.4890841 & -2.511266 & -2.4759352 & -4.123438 & -2.636961 & -2.501794 & -2.280900 & -1.995176 & -4.136387 & -2.2719476 & -3.281901 & -4.1808286 & -2.477444 & -4.2158983 & -4.0972420 & -2.855749 & -2.372529 & -1.869562 & -4.144080 & -3.046326 & -2.871333 & -4.1569326 & -4.230310 & -4.248103 & -4.220708 & -2.757501 & -4.231990 & -4.266050 & -4.195953 & -2.534362 & -4.233796 & -3.934337 & -3.9500185 & -1.5134884 & -2.704028 & -3.096323 & -2.8291901 & -3.096466 & -2.245188 & -2.957332 & -2.752189 & -3.270432 & -2.8178289 & -2.470849 & -2.378401 & -2.187850 & -2.456291 & -2.322719 & -2.4286289 & -2.205360 & -2.2113462 & -2.297713 & -2.564443 & -2.4030391 & -2.098739 & -2.449882 & -2.384560 & -2.2781130 & -2.379660 & -2.425688 & -2.353713 & -2.992682 & -2.9190708 & -2.4371444 & -2.73609098 & -2.973232 & -3.184788 & -2.0381566 & -3.103178 & -2.3925198 & -3.460059 & -2.3364914 & -2.2054422 & -1.9507142 & -2.2974032 & -2.785251\\
+	A2M & -2.500844 & -2.640260 & -2.468143 & -2.387549 & -2.272424 & -2.4894340 & -2.4364424 & -2.4821393 & -2.626212 & -2.295681 & -2.309958 & -2.381131 & -2.3259571 & -2.271129 & -2.160659 & -4.239378 & -4.239405 & -4.184764 & -4.242964 & -4.181390 & -3.1953172 & -4.277728 & -2.663617 & -4.1801193 & -4.2453839 & -2.322686 & -4.2844750 & -4.242797 & -4.242752 & -4.188180 & -4.246451 & -4.1846910 & -3.1941514 & -4.281217 & -2.662503 & -4.1834244 & -4.2489502 & -2.321631 & -4.288002 & -3.956878 & -3.955241 & -1.992584 & -2.5999442 & -2.3501400 & -2.029650 & -1.756078 & -2.249978 & -2.708551 & -1.999969 & -2.4054395 & -2.900665 & -1.988427 & -2.3327491 & -2.149171 & -1.5222994 & -1.897139 & -2.0526596 & -2.729047 & -2.473704 & -2.541306 & -2.3524511 & -2.149157 & -2.121960 & -2.412815 & -1.952830 & -2.3700206 & -2.008518 & -4.1744791 & -4.123438 & -4.221482 & -2.052954 & -4.210820 & -4.088808 & -4.136387 & -4.1665699 & -4.145032 & -1.9496421 & -4.089943 & -4.2158983 & -4.0972420 & -2.808287 & -4.108799 & -4.267546 & -4.144080 & -2.041754 & -4.254520 & -4.1569326 & -4.230310 & -4.248103 & -4.220708 & -3.138399 & -4.231990 & -2.440476 & -4.195953 & -4.279274 & -4.233796 & -1.996864 & -3.9500185 & -2.5825576 & -2.304196 & -2.427787 & -3.4258914 & -2.908951 & -2.538447 & -2.080120 & -2.911710 & -2.596538 & -1.9662084 & -2.629471 & -2.525616 & -2.492993 & -2.304079 & -2.456369 & -2.1492763 & -2.274250 & -2.1306700 & -2.541521 & -2.439220 & -2.4158850 & -2.076616 & -2.232756 & -2.531689 & -1.9137846 & -2.552349 & -2.568469 & -2.316034 & -1.606093 & -1.8621943 & -2.3438576 & -2.37768381 & -1.846296 & -3.026328 & -2.0940404 & -2.355889 & -2.4841404 & -1.973206 & -3.2994130 & -1.7789308 & -2.5462753 & -2.5513615 & -2.605454\\
+	A2ML1 & -1.225015 & -1.966195 & -1.452122 & -1.604676 & -1.885406 & -1.6422873 & -1.7271878 & -1.7699730 & -1.645435 & -1.313775 & -1.736247 & -1.936203 & -1.5909421 & -1.475005 & -1.563795 & -4.239378 & -4.239405 & -4.184764 & -2.246013 & -4.181390 & -2.5811830 & -4.277728 & -4.265087 & -2.5195330 & -4.2453839 & -4.231898 & -4.2844750 & -4.242797 & -4.242752 & -4.188180 & -2.245079 & -4.1846910 & -2.5800809 & -4.281217 & -4.268538 & -2.5183417 & -4.2489502 & -4.235294 & -4.288002 & -2.143186 & -3.955241 & -3.947758 & -3.2520210 & -3.2584916 & -3.364820 & -2.545731 & -2.952213 & -2.708551 & -1.731711 & -2.2858504 & -3.492730 & -3.145446 & -2.7976873 & -3.476144 & -1.9909588 & -2.906111 & -3.3675705 & -2.555603 & -2.543867 & -2.460376 & -2.6707041 & -3.065336 & -3.018626 & -3.057620 & -2.674242 & -3.0178675 & -3.292879 & -4.1744791 & -4.123438 & -2.241546 & -4.228995 & -4.210820 & -4.088808 & -2.752827 & -4.1665699 & -4.145032 & -1.9429819 & -4.089943 & -4.2158983 & -2.1893925 & -2.328874 & -4.108799 & -4.267546 & -2.094617 & -4.211131 & -2.720357 & -4.1569326 & -2.354240 & -3.081765 & -4.220708 & -3.110269 & -1.902626 & -4.266050 & -4.195953 & -4.279274 & -4.233796 & -3.934337 & -3.9500185 & -3.9522620 & -3.167327 & -3.010292 & -2.7061233 & -3.519848 & -3.184973 & -2.250598 & -2.614354 & -3.078173 & -2.8017927 & -1.674864 & -1.583285 & -0.444444 & -1.589529 & -1.502451 & -1.6288061 & -1.624659 & -0.1918154 & -1.557717 & -1.700137 & -0.7073978 & -1.238505 & -1.836735 & -1.542461 & -1.5584103 & -1.419494 & -1.979649 & -1.645453 & -3.468745 & -2.9539170 & -2.6977162 & -2.53294175 & -2.352776 & -3.207625 & -2.6456511 & -2.340616 & -2.7969383 & -3.012654 & -3.0586973 & -2.5425815 & -2.3269974 & -3.0369349 & -2.590921\\
+	A4GALT & -2.311618 & -2.483689 & -2.521552 & -2.396670 & -2.232927 & -2.2345093 & -2.1577899 & -2.0392966 & -2.529866 & -2.409896 & -2.295296 & -2.151169 & -2.2009538 & -2.118070 & -2.427791 & -4.239378 & -4.239405 & -1.157058 & -4.242964 & -2.186286 & -2.8731862 & -4.277728 & -4.265087 & -2.4971957 & -1.8800847 & -2.079945 & -2.1184299 & -4.242797 & -4.242752 & -1.156677 & -4.246451 & -2.1851694 & -2.8720374 & -4.281217 & -4.268538 & -2.4960116 & -1.8793028 & -2.078979 & -2.117561 & -2.372676 & -3.955241 & -3.947758 & -2.6974542 & -2.2198283 & -3.061349 & -1.413449 & -2.653964 & -2.652134 & -2.888344 & -2.1397507 & -1.515553 & -2.815425 & -2.3476650 & -3.139902 & -3.3403332 & -2.679135 & -3.0616089 & -2.750373 & -2.889689 & -2.184565 & -2.4368115 & -2.584671 & -2.229115 & -3.173711 & -1.947527 & -3.0791003 & -3.330567 & -4.1744791 & -4.123438 & -2.543244 & -1.021094 & -1.726913 & -1.286190 & -4.136387 & -2.4546546 & -4.145032 & -1.2430340 & -4.089943 & -4.2158983 & -4.0972420 & -4.205030 & -2.636841 & -4.267546 & -3.269902 & -2.760570 & -4.254520 & -0.6755081 & -1.840200 & -1.960281 & -4.220708 & -2.529986 & -4.231990 & -4.266050 & -4.195953 & -4.279274 & -4.233796 & -3.934337 & -3.9500185 & -3.9522620 & -2.781485 & -2.901986 & -3.0086739 & -3.275438 & -3.114432 & -1.942552 & -2.790253 & -2.908349 & -2.4637234 & -2.308879 & -2.540402 & -2.125555 & -2.266267 & -2.456760 & -2.2062489 & -2.072527 & -2.3188552 & -2.161543 & -2.189205 & -2.2841332 & -2.163734 & -2.178320 & -2.371973 & -2.3593723 & -2.303494 & -2.316969 & -2.292554 & -2.306435 & -2.5855623 & -2.5716950 & -2.29561551 & -1.831706 & -1.648894 & -1.9227980 & -2.609918 & -2.1919224 & -2.430139 & -3.2209430 & -3.3795673 & -1.0278439 & -2.6605926 & -1.946874\\
+	A4GNT & -2.038587 & -1.699258 & -1.900798 & -2.170456 & -2.195716 & -1.9489714 & -1.8309328 & -1.9534459 & -2.182871 & -1.583436 & -1.851566 & -2.114348 & -1.6842908 & -1.422521 & -1.535439 & -4.239378 & -2.933301 & -4.184764 & -1.943417 & -2.471767 & -4.2171645 & -4.277728 & -1.699678 & -1.5451375 & -4.2453839 & -4.231898 & -4.2844750 & -4.242797 & -2.932075 & -4.188180 & -1.942596 & -2.4705478 & -4.2206235 & -4.281217 & -1.698915 & -1.5444562 & -4.2489502 & -4.235294 & -4.288002 & -1.453735 & -1.139249 & -1.771306 & -2.1643984 & -1.8883570 & -1.944249 & -2.984862 & -1.839433 & -1.349589 & -2.799140 & -1.8837772 & -1.852322 & -1.618084 & -1.9601354 & -1.430979 & -3.1975541 & -2.003885 & -1.5173425 & -2.047930 & -1.815710 & -1.681619 & -1.7447128 & -1.709957 & -2.659670 & -2.850508 & -1.739945 & -1.4791445 & -1.806050 & -4.1744791 & -4.123438 & -2.734017 & -1.940681 & -4.210820 & -1.783887 & -3.311943 & -1.3437580 & -4.145032 & -1.8175890 & -2.556414 & -4.2158983 & -2.6963474 & -4.205030 & -4.108799 & -1.757702 & -1.724471 & -2.798490 & -3.569750 & -4.1569326 & -2.196735 & -2.078517 & -1.895507 & -1.770608 & -4.231990 & -4.266050 & -2.062007 & -4.279274 & -2.206856 & -1.456405 & -1.4621368 & -0.9250564 & -2.092454 & -3.194431 & -1.4819255 & -2.261658 & -2.311199 & -2.394992 & -1.687981 & -2.626184 & -1.8737763 & -1.880709 & -1.855139 & -1.534208 & -2.007503 & -1.837155 & -1.8597311 & -2.175986 & -1.6669575 & -1.743832 & -1.749172 & -1.8670188 & -1.629376 & -1.640044 & -2.058947 & -1.6737011 & -1.975293 & -1.551614 & -1.214808 & -2.173755 & -1.9086520 & -1.8207019 & -2.56107269 & -1.239487 & -1.409749 & -3.0139655 & -2.074730 & -2.0876437 & -2.351640 & -3.1646134 & -1.4728106 & -1.1912784 & -2.6023795 & -1.806118\\
+	AAAS & -1.045208 & -1.594219 & -1.287075 & -1.073887 & -1.316088 & -0.7342412 & -0.9681738 & -0.9123387 & -1.347118 & -1.211588 & -1.200191 & -1.377331 & -0.7733395 & -1.440544 & -1.058392 & -1.376538 & -1.170217 & -1.274357 & -1.145501 & -0.843931 & -0.6557804 & -1.318631 & -1.223899 & -0.6923566 & -0.7919854 & -1.048840 & -0.8591058 & -1.376003 & -1.169798 & -1.273882 & -1.145157 & -0.8438208 & -0.6557864 & -1.318173 & -1.223456 & -0.6924906 & -0.7919252 & -1.048545 & -0.859046 & -1.063378 & -1.244601 & -1.832082 & -0.6737921 & -0.8275334 & -1.153174 & -1.195067 & -1.216821 & -1.808849 & -1.195913 & -0.5522793 & -1.247076 & -1.123113 & -0.1126342 & -1.427310 & -0.2073825 & -1.137562 & -0.8225928 & -1.401728 & -3.248665 & -1.974265 & -0.7296933 & -1.691848 & -1.696030 & -3.020266 & -1.691843 & -0.8762606 & -2.396610 & -0.9698015 & -2.284322 & -1.536193 & -1.283062 & -1.038377 & -1.119656 & -1.005634 & -0.7621909 & -1.606966 & -0.7865948 & -1.609630 & -0.7557845 & -0.7371367 & -1.150668 & -1.276452 & -1.776104 & -1.191367 & -1.333613 & -1.714351 & -1.3460520 & -1.256363 & -1.197738 & -1.450195 & -1.210859 & -1.364941 & -1.419931 & -1.334946 & -1.483753 & -1.074668 & -1.146587 & -0.9662532 & -1.1817624 & -1.492558 & -1.354306 & -0.7015644 & -1.930660 & -2.170547 & -2.657704 & -2.802536 & -1.466909 & -0.7564543 & -1.530523 & -1.046915 & -1.891377 & -1.593776 & -2.024256 & -0.9028773 & -1.340060 & -1.7949944 & -1.817058 & -1.077545 & -1.8310484 & -1.201223 & -1.093665 & -1.330067 & -0.8093744 & -1.181741 & -1.393093 & -1.943526 & -2.277277 & -0.5072169 & -0.1537697 & -0.02650528 & -2.005306 & -2.464002 & -0.3043316 & -1.151105 & -0.6012513 & -0.886129 & -0.2309443 & -0.9986175 & -0.8256078 & -0.6048712 & -1.144839\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} boxplot\PY{p}{(}dat.norm\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} BiocManager\PY{o}{::}install\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{affyPLM\PYZdq{}}\PY{p}{)}
+         
+         \PY{k+kn}{library}\PY{p}{(}affyPLM\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Bioconductor version 3.9 (BiocManager 1.30.4), R 3.6.0 (2019-04-26)
+Installing package(s) 'affyPLM'
+also installing the dependencies ‘XVector’, ‘Biostrings’, ‘gcrma’
+
+installation path not writeable, unable to update packages: boot, class,
+  cluster, codetools, foreign, KernSmooth, lattice, MASS, Matrix, mgcv, nlme,
+  nnet, spatial, survival
+Update old packages: 'affy', 'affyio', 'vsn', 'zlibbioc'
+Loading required package: affy
+Loading required package: gcrma
+Loading required package: preprocessCore
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} dat.norm.scale\PY{o}{=}normalize.scaling\PY{p}{(}dat.num.rord\PY{p}{,}trim\PY{o}{=}\PY{l+m}{0.02}\PY{p}{,} baseline\PY{o}{=}\PY{l+m}{\PYZhy{}0.5}\PY{p}{,} log.scalefactors\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} par\PY{p}{(}mfrow\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         boxplot\PY{p}{(}dat.num.rord\PY{p}{)}
+         boxplot\PY{p}{(}dat.norm\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{o}{?}normalize.scaling
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
