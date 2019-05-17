@@ -106,11 +106,14 @@ newer command:
 ## Figures/Results from our analysis on https://www.networkanalyst.ca/
 Cochram's Q test to measure the statisical heterogeneity estimation for random effect model(REM) for meta analysis.
 ![CochranQ_0 05](https://user-images.githubusercontent.com/41751561/57943536-4342d800-78a2-11e9-8b9c-00cc9bb31a00.png)
+
 PCA plot before and after meta analysis
 ![qc_meta_pca_0_dpi72](https://user-images.githubusercontent.com/41751561/57943543-46d65f00-78a2-11e9-8a76-9a859be95d38.png)
 ![qc_meta_pca_1_dpi72](https://user-images.githubusercontent.com/41751561/57943549-48a02280-78a2-11e9-81e2-e95159911ea5.png)
+
 Protein-protein interaction network. We used 369 seed deregulated genes in the first-order PPI network, generating 9848 edges and 4318 nodes.
 ![network_zero_order_2datasets](https://user-images.githubusercontent.com/41751561/57943538-450c9b80-78a2-11e9-9f2e-925d9ef46d40.png)
+
 Transcription factors network using ENCODE database
 ![TF_encode_2datasets](https://user-images.githubusercontent.com/41751561/57943553-49d14f80-78a2-11e9-8eb2-b9ee6ee8765d.png)
 
