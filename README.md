@@ -102,6 +102,10 @@ newer command:
 `library("hgu133plus2.db")`  
 `library("illuminaHumanv4.db")`  
 
+##########
+#running matrics file reformat before uploading to networkanalyst
+e.g sh scripts/transform_matrics.sh data/GSE15573_series_matrix.txt.gz
+##########
  
 ## Figures/Results from our analysis on https://www.networkanalyst.ca/
 Cochram's Q test to measure the statisical heterogeneity estimation for random effect model(REM) for meta analysis.
